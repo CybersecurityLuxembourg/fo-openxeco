@@ -30,7 +30,7 @@ export default class InsideApp extends React.Component {
 		return (
 			<div id="InsideApp">
 				<a
-					href="https://github.com/you"
+					href="https://github.com/CybersecurityLuxembourg/openxeco-core"
 					id="InsideApp-ForkMe"
 				>
 					<img
