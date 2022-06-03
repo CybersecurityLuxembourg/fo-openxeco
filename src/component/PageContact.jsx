@@ -99,6 +99,44 @@ export default class PageContact extends React.Component {
 						</a>
 					</div>
 
+					<div className="col-md-6">
+						<a
+							href="/pdf/openXeco presentation for NCC.pdf"
+							target="_blank"
+							rel="noreferrer"
+						>
+							<div className="box">
+								<div className="box-wrap">
+									<div className="box-logo">
+										<i className="fas fa-file-pdf"/>
+									</div>
+									<div className="box-text">
+										openXeco presentation for NCCs
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+
+					<div className="col-md-6">
+						<a
+							href="https://github.com/CybersecurityLuxembourg/openxeco-core/blob/main/doc/INSTALL_SERVER.md"
+							target="_blank"
+							rel="noreferrer"
+						>
+							<div className="box">
+								<div className="box-wrap">
+									<div className="box-logo">
+										<i className="fas fa-file-alt"/>
+									</div>
+									<div className="box-text">
+										Installation documentation
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+
 					<div className="col-md-12">
 						<h1>Repositories</h1>
 					</div>
@@ -118,6 +156,8 @@ export default class PageContact extends React.Component {
 										openxeco-core
 									</div>
 									<div className="box-subtext">
+										API, admin webapp and community webapp
+										<br/>
 										https://github.com/CybersecurityLuxembourg/openxeco-core
 									</div>
 								</div>
@@ -140,6 +180,8 @@ export default class PageContact extends React.Component {
 										openxeco-web-portal
 									</div>
 									<div className="box-subtext">
+										ReactJS template for presentation portal
+										<br/>
 										https://github.com/CybersecurityLuxembourg/openxeco-web-portal
 									</div>
 								</div>
@@ -159,10 +201,36 @@ export default class PageContact extends React.Component {
 										<i className="fab fa-github"/>
 									</div>
 									<div className="box-text">
-										openxeco-web
+										openxeco.org
 									</div>
 									<div className="box-subtext">
-										https://github.com/CybersecurityLuxembourg/openxeco-web
+										Source code of the webapp you are currently reading ;)
+										<br/>
+										https://github.com/CybersecurityLuxembourg/openxeco.org
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+
+					<div className="col-md-6">
+						<a
+							href="https://github.com/CybersecurityLuxembourg/openxeco-book"
+							target="_blank"
+							rel="noreferrer"
+						>
+							<div className="box">
+								<div className="box-wrap">
+									<div className="box-logo">
+										<i className="fab fa-github"/>
+									</div>
+									<div className="box-text">
+										openxeco-book
+									</div>
+									<div className="box-subtext">
+										User guide of openXeco
+										<br/>
+										https://github.com/CybersecurityLuxembourg/openxeco-book
 									</div>
 								</div>
 							</div>
