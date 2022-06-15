@@ -2,8 +2,7 @@ import React from "react";
 import "./PageNetwork.css";
 import { Link } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
-import createEngine, { DefaultNodeModel, DiagramModel } from "@projectstorm/react-diagrams";
-import { CanvasWidget } from "@projectstorm/react-canvas-core";
+import Graph from "react-graph-vis";
 import { getForeignRequest } from "../utils/request.jsx";
 
 export default class PageNetwork extends React.Component {
@@ -12,7 +11,6 @@ export default class PageNetwork extends React.Component {
 
 		this.fetchNodes = this.fetchNodes.bind(this);
 		this.fetchNode = this.fetchNode.bind(this);
-		this.buildDiagram = this.buildDiagram.bind(this);
 
 		this.state = {
 			nodes: [
@@ -20,29 +18,15 @@ export default class PageNetwork extends React.Component {
 				"https://api.distributed.lu",
 				"https://api.cyber4africa.org",
 				"https://api.encryptioneurope.eu",
+				"https://api.ensure-collaborative.eu",
 			],
 			nodeInformation: {},
 			loadingProgress: 0,
-			engine: null,
-			value: 0,
 		};
 	}
 
 	componentDidMount() {
 		this.fetchNodes();
-
-		const model = new DiagramModel();
-		const engine = createEngine();
-		engine.setModel(model);
-		this.setState({ engine }, () => {
-			this.buildDiagram();
-		});
-	}
-
-	componentDidUpdate(_, prevState) {
-		if (prevState.nodeInformation !== this.state.nodeInformation) {
-			this.buildDiagram();
-		}
 	}
 
 	fetchNodes() {
@@ -60,7 +44,7 @@ export default class PageNetwork extends React.Component {
 	}
 
 	fetchNode(baseUrl) {
-		const url = baseUrl + "/network/get_node_information";
+		const url = baseUrl + "/public/get_public_node_information";
 
 		return new Promise((resolve) => getForeignRequest(url, (data) => {
 			resolve(data);
@@ -74,65 +58,56 @@ export default class PageNetwork extends React.Component {
 		}));
 	}
 
-	buildDiagram() {
-		const canvas = document.getElementById("PageNetwork");
-		const centerX = canvas.offsetWidth / 2;
-		const centerY = canvas.offsetHeight / 2;
+	getGraphData() {
+		if (Object.keys(this.state.nodeInformation).length === 0) {
+			return {};
+		}
 
-		const nodes = [];
+		const oxeNodes = Object.keys(this.state.nodeInformation)
+			.map((v, i) => ({
+				id: i,
+				label: this.state.nodeInformation[v]
+					? "<b>" + this.state.nodeInformation[v].project_name + "\nv" + this.state.nodeInformation[v].version
+					: "<b>" + v,
+				color: {
+					border: "white",
+					background: this.state.nodeInformation[v] ? "#03e3e3" : "lightgrey",
+				},
+				font: { color: "white", weight: "bold", size: 14 },
+				shape: "box",
+				chosen: false,
+			}));
 
-		const node1 = new DefaultNodeModel({
-			name: "openXeco",
-			color: "#03e3e3",
-		});
-		node1.setPosition(centerX, centerY);
-		node1.setLocked(true);
-		const port1 = node1.addOutPort("Out");
-		nodes.push(node1);
-
-		Object.keys(this.state.nodeInformation).forEach((n, i) => {
-			const angle = Object.keys(this.state.nodeInformation).length * i;
-			const x = centerX + Math.cos(angle) * 150;
-			const y = centerY + Math.sin(angle) * 150;
-
-			if (this.state.nodeInformation[n] !== null) {
-				const node2 = new DefaultNodeModel({
-					name: this.state.nodeInformation[n].project_name,
-					color: "#03e3e3",
-				});
-				node2.setPosition(x, y);
-				node2.setLocked(true);
-				nodes.push(node2);
-				const port2 = node2.addOutPort("Out");
-				const link = port1.link(port2);
-				link.setColor("#ffffff");
-				link.setLocked(true);
-				nodes.push(link);
-			} else {
-				const node2 = new DefaultNodeModel({
-					name: n,
-					color: "#dddddd",
-				});
-				node2.setPosition(x, y);
-				node2.setLocked(true);
-				nodes.push(node2);
-				const port2 = node2.addOutPort("Out");
-				const link = port1.link(port2);
-				link.setColor("#ffffff");
-				link.setLocked(true);
-				nodes.push(link);
-			}
-		});
-
-		const model = new DiagramModel();
-
-		nodes.forEach((n) => {
-			model.addAll(n);
-		});
-
-		this.state.engine.setModel(model);
-
-		return null;
+		return {
+			nodes: [
+				{
+					id: -1,
+					title: "dddd",
+					label: "<b>openXeco",
+					color: { border: "white", background: "#193c6d" },
+					font: { color: "white", size: 14 },
+					shape: "box",
+					chosen: false,
+				},
+				...oxeNodes,
+			],
+			edges: [
+				...oxeNodes.map((r) => ({
+					from: -1,
+					to: r.id,
+					color: {
+						color: "white",
+					},
+					chosen: false,
+					width: 2,
+					smooth: {
+						enabled: true,
+						type: "curvedCCW",
+						roundness: 0.2,
+					},
+				})),
+			],
+		};
 	}
 
 	changeState(field, value) {
@@ -140,14 +115,43 @@ export default class PageNetwork extends React.Component {
 	}
 
 	render() {
+		const options = {
+			physics: { barnesHut: { springLength: 150, springConstant: 0.05 } },
+			layout: {
+			},
+			nodes: {
+				margin: {
+					top: 15,
+					bottom: 15,
+					left: 20,
+					right: 20,
+				},
+				font: {
+					multi: "html",
+				},
+			},
+			edges: {
+				color: "#000000",
+			},
+			height: "500px",
+		};
+
+		const events = {
+			/* select: function(event) {
+				var { nodes, edges } = event;
+			} */
+		};
+
 		return (
 			<div id="PageNetwork">
-				{this.state.engine
-					&& <CanvasWidget
-						className="myDiagramDiv"
-						engine={this.state.engine}
+				{Object.keys(this.state.nodeInformation).length > 0
+					&& <Graph
+						graph={this.getGraphData()}
+						options={options}
+						events={events}
 					/>
 				}
+
 				<LoadingBar
 					className="LoadingBar"
 					color='#f11946'
