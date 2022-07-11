@@ -101,25 +101,6 @@ export default class PageContact extends React.Component {
 
 					<div className="col-md-6">
 						<a
-							href="/pdf/openXeco presentation for NCC.pdf"
-							target="_blank"
-							rel="noreferrer"
-						>
-							<div className="box">
-								<div className="box-wrap">
-									<div className="box-logo">
-										<i className="fas fa-file-pdf"/>
-									</div>
-									<div className="box-text">
-										openXeco presentation for NCCs
-									</div>
-								</div>
-							</div>
-						</a>
-					</div>
-
-					<div className="col-md-6">
-						<a
 							href="https://github.com/CybersecurityLuxembourg/openxeco-core/blob/main/doc/INSTALL_SERVER.md"
 							target="_blank"
 							rel="noreferrer"
