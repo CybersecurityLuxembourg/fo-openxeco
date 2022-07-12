@@ -3,22 +3,62 @@ import "./InsideApp.css";
 import { Route, Switch } from "react-router-dom";
 import Menu from "./Menu.jsx";
 import PageHome from "./PageHome.jsx";
+import PageAPIUsage from "./PageAPIUsage.jsx";
 import PageContact from "./PageContact.jsx";
 import PageNetwork from "./PageNetwork.jsx";
+import { getForeignRequest } from "../utils/request.jsx";
 
 export default class InsideApp extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.changeState = this.changeState.bind(this);
 		this.changeMenu = this.changeMenu.bind(this);
 
 		this.state = {
 			selectedMenu: window.location.pathname.replace(/\//, ""),
+			nodeInformation: {},
+			loadingProgress: 0,
+			nodes: [
+				"https://api.cybersecurity.lu",
+				"https://api.distributed.lu",
+				"https://api.cyber4africa.org",
+				"https://api.encryptioneurope.eu",
+				"https://api.ensure-collaborative.eu",
+			],
 		};
 	}
 
+	fetchNodes() {
+		this.setState({ nodeInformation: {} }, () => {
+			Promise.all(this.state.nodes.map(this.fetchNode)).then((data) => {
+				const nodeInformation = {};
+
+				data.forEach((d, i) => {
+					nodeInformation[this.state.nodes[i]] = d;
+				});
+
+				this.setState({ nodeInformation });
+			});
+		});
+	}
+
+	fetchNode(baseUrl) {
+		const url = baseUrl + "/public/get_public_node_information";
+
+		return new Promise((resolve) => getForeignRequest(url, (data) => {
+			resolve(data);
+			this.setState({ loadingProgress: this.state.loadingProgress + 1 });
+		}, () => {
+			resolve(null);
+			this.setState({ loadingProgress: this.state.loadingProgress + 1 });
+		}, () => {
+			resolve(null);
+			this.setState({ loadingProgress: this.state.loadingProgress + 1 });
+		}));
+	}
+
 	changeMenu(menu) {
+		console.log(menu);
 		this.setState({ selectedMenu: menu });
 	}
 
@@ -56,6 +96,17 @@ export default class InsideApp extends React.Component {
 							<Switch>
 								<Route path="/network" render={(props) => <PageNetwork
 									changeMenu={this.changeMenu}
+									nodes={this.state.nodes}
+									nodeInformation={this.state.nodeInformation}
+									fetchNodes={() => this.fetchNodes()}
+									loadingProgress={this.state.loadingProgress}
+									{...props}
+								/>}/>
+								<Route path="/api" render={(props) => <PageAPIUsage
+									nodes={this.state.nodes}
+									nodeInformation={this.state.nodeInformation}
+									fetchNodes={() => this.fetchNodes()}
+									loadingProgress={this.state.loadingProgress}
 									{...props}
 								/>}/>
 								<Route path="/contact" render={(props) => <PageContact

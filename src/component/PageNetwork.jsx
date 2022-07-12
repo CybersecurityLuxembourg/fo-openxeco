@@ -3,75 +3,33 @@ import "./PageNetwork.css";
 import { Link } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
 import Graph from "react-graph-vis";
-import { getForeignRequest } from "../utils/request.jsx";
 
 export default class PageNetwork extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.fetchNodes = this.fetchNodes.bind(this);
-		this.fetchNode = this.fetchNode.bind(this);
-
 		this.state = {
-			nodes: [
-				"https://api.cybersecurity.lu",
-				"https://api.distributed.lu",
-				"https://api.cyber4africa.org",
-				"https://api.encryptioneurope.eu",
-				"https://api.ensure-collaborative.eu",
-			],
-			nodeInformation: {},
-			loadingProgress: 0,
 		};
 	}
 
 	componentDidMount() {
-		this.fetchNodes();
-	}
-
-	fetchNodes() {
-		this.setState({ nodeInformation: {} }, () => {
-			Promise.all(this.state.nodes.map(this.fetchNode)).then((data) => {
-				const nodeInformation = {};
-
-				data.forEach((d, i) => {
-					nodeInformation[this.state.nodes[i]] = d;
-				});
-
-				this.setState({ nodeInformation });
-			});
-		});
-	}
-
-	fetchNode(baseUrl) {
-		const url = baseUrl + "/public/get_public_node_information";
-
-		return new Promise((resolve) => getForeignRequest(url, (data) => {
-			resolve(data);
-			this.setState({ loadingProgress: this.state.loadingProgress + 1 });
-		}, () => {
-			resolve(null);
-			this.setState({ loadingProgress: this.state.loadingProgress + 1 });
-		}, () => {
-			resolve(null);
-			this.setState({ loadingProgress: this.state.loadingProgress + 1 });
-		}));
+		this.props.fetchNodes();
 	}
 
 	getGraphData() {
-		if (Object.keys(this.state.nodeInformation).length === 0) {
+		if (Object.keys(this.props.nodeInformation).length === 0) {
 			return {};
 		}
 
-		const oxeNodes = Object.keys(this.state.nodeInformation)
+		const oxeNodes = Object.keys(this.props.nodeInformation)
 			.map((v, i) => ({
 				id: i,
-				label: this.state.nodeInformation[v]
-					? "<b>" + this.state.nodeInformation[v].project_name + "\n" + this.state.nodeInformation[v].version
+				label: this.props.nodeInformation[v]
+					? "<b>" + this.props.nodeInformation[v].project_name + "\n" + this.props.nodeInformation[v].version
 					: "<b>" + v,
 				color: {
 					border: "white",
-					background: this.state.nodeInformation[v] ? "#03e3e3" : "lightgrey",
+					background: this.props.nodeInformation[v] ? "#03e3e3" : "lightgrey",
 				},
 				font: { color: "white", weight: "bold", size: 14 },
 				shape: "box",
@@ -144,7 +102,7 @@ export default class PageNetwork extends React.Component {
 
 		return (
 			<div id="PageNetwork">
-				{Object.keys(this.state.nodeInformation).length > 0
+				{Object.keys(this.props.nodeInformation).length > 0
 					&& <Graph
 						graph={this.getGraphData()}
 						options={options}
@@ -155,7 +113,7 @@ export default class PageNetwork extends React.Component {
 				<LoadingBar
 					className="LoadingBar"
 					color='#f11946'
-					progress={(this.state.loadingProgress / this.state.nodes.length) * 100}
+					progress={(this.props.loadingProgress / this.props.nodes.length) * 100}
 				/>
 
 				<Link to="/">

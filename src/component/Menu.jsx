@@ -33,6 +33,14 @@ export default class Menu extends React.Component {
 						Network
 					</div>
 				</Link>
+				<Link to="/api">
+					<div
+						className={"Menu-element "
+							+ (this.props.selectedMenu === "api" ? "Menu-element-selected" : "")}
+						onClick={() => this.props.changeMenu("api")}>
+						API
+					</div>
+				</Link>
 				<Link to="/contact">
 					<div
 						className={"Menu-element "

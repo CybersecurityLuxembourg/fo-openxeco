@@ -118,6 +118,30 @@ export default class PageContact extends React.Component {
 						</a>
 					</div>
 
+					<div className="col-md-6">
+						<a
+							href="https://github.com/CybersecurityLuxembourg/openxeco-book"
+							target="_blank"
+							rel="noreferrer"
+						>
+							<div className="box">
+								<div className="box-wrap">
+									<div className="box-logo">
+										<i className="fab fa-github"/>
+									</div>
+									<div className="box-text">
+										openxeco-book
+									</div>
+									<div className="box-subtext">
+										User guide of openXeco
+										<br/>
+										https://github.com/CybersecurityLuxembourg/openxeco-book
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+
 					<div className="col-md-12">
 						<h1>Repositories</h1>
 					</div>
