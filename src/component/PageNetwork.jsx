@@ -67,7 +67,7 @@ export default class PageNetwork extends React.Component {
 			.map((v, i) => ({
 				id: i,
 				label: this.state.nodeInformation[v]
-					? "<b>" + this.state.nodeInformation[v].project_name + "\nv" + this.state.nodeInformation[v].version
+					? "<b>" + this.state.nodeInformation[v].project_name + "\n" + this.state.nodeInformation[v].version
 					: "<b>" + v,
 				color: {
 					border: "white",
