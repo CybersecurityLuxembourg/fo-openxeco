@@ -4,5 +4,6 @@
 }
 
 #PageHome img {
-	margin: 0 auto;
+	margin: 50px auto;
+	max-width: 100%;
 }

@@ -211,7 +211,9 @@ export default class PageHome extends React.Component {
 						</ul>
 					</div>
 
-					<div className="col-md-12">
+					<div className="col-md-2"/>
+
+					<div className="col-md-8">
 						<div className="center">
 							<img
 								src="/img/openxeco-node.png"
@@ -258,52 +260,11 @@ export default class PageHome extends React.Component {
 						</ul>
 					</div>
 
-					<div className="col-md-4">
-						<div className="box">
-							<div className="box-wrap">
-								<div className="box-logo">
-									<i className="fas fa-building"></i>
-								</div>
-								<div className="box-text">
-									Entity
-								</div>
-								<div className="box-subtext">
-									Private sector, public sector and civil society
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div className="col-md-4">
-						<div className="box">
-							<div className="box-wrap">
-								<div className="box-logo">
-									<i className="fas fa-feather-alt"></i>
-								</div>
-								<div className="box-text">
-									Article
-								</div>
-								<div className="box-subtext">
-									News, events, job offers and more
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div className="col-md-4">
-						<div className="box">
-							<div className="box-wrap">
-								<div className="box-logo">
-									<i className="fas fa-shapes"/>
-								</div>
-								<div className="box-text">
-									Taxonomy
-								</div>
-								<div className="box-subtext">
-									Use your own taxonomy to classify the entities and
-									the articles
-								</div>
-							</div>
+					<div className="col-md-12">
+						<div className="center">
+							<img
+								src="/img/openxeco-objects.png"
+							/>
 						</div>
 					</div>
 				</div>
@@ -318,7 +279,9 @@ export default class PageHome extends React.Component {
 						of handshakes creates a network of nodes.
 					</div>
 
-					<div className="col-md-12">
+					<div className="col-md-2"/>
+
+					<div className="col-md-8">
 						<div className="center">
 							<img
 								src="/img/openxeco-network.png"
