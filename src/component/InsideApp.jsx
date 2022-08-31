@@ -23,7 +23,7 @@ export default class InsideApp extends React.Component {
 				"https://api.distributed.lu",
 				"https://api.cyber4africa.org",
 				"https://api.encryptioneurope.eu",
-				"https://api.ensure-collaborative.eu",
+				"https://api.test.ensure-collaborative.eu",
 			],
 		};
 	}
