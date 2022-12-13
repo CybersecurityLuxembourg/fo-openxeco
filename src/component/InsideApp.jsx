@@ -24,6 +24,7 @@ export default class InsideApp extends React.Component {
 				"https://api.cyber4africa.org",
 				"https://api.encryptioneurope.eu",
 				"https://api.test.ensure-collaborative.eu",
+				"https://api.ncc-mita.gov.mt",
 			],
 		};
 	}
