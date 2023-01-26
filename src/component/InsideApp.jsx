@@ -119,6 +119,24 @@ export default class InsideApp extends React.Component {
 								/>}/>
 							</Switch>
 						</div>
+
+						<div id="InsideApp-links" className="col-md-9">
+							<a
+								href="/pdf/openXeco_legal_notice_2023-01-26.pdf"
+								target="_blank"
+								rel="noreferrer"
+							>
+								Legal notice
+							</a>
+
+							<a
+								href="/pdf/openXeco_privacy_policy_2023-01-26.pdf"
+								target="_blank"
+								rel="noreferrer"
+							>
+								Privacy policy
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
