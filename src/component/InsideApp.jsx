@@ -120,7 +120,7 @@ export default class InsideApp extends React.Component {
 							</Switch>
 						</div>
 
-						<div id="InsideApp-links" className="col-md-9">
+						<div id="InsideApp-links" className="col-md-12">
 							<a
 								href="/pdf/openXeco_legal_notice_2023-01-26.pdf"
 								target="_blank"
