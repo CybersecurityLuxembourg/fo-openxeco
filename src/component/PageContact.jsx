@@ -34,10 +34,23 @@ export default class PageContact extends React.Component {
 						<h1>Contact</h1>
 					</div>
 
+					<div className="col-md-4 offset-md-2 center">
+						<img
+							src="/img/logo_nc3.jpg"
+						/>
+					</div>
+
+					<div className="col-md-4 center">
+						<div className="PageContact-spaced center">
+							<div>Luxembourg National Cybersecurity Competence Center (NC3)</div>
+							<div>122, Rue Adolphe Fischer, L-1521 Luxembourg</div>
+						</div>
+					</div>
+
 					<div className="col-md-6">
 						<a
 							href="#"
-							onClick={() => PageContact.copyToClipboard("team@cybersecurity-luxembourg.com")}
+							onClick={() => PageContact.copyToClipboard("openxeco@nc3.lu")}
 						>
 							<div className="box">
 								<div className="box-wrap">
@@ -48,7 +61,7 @@ export default class PageContact extends React.Component {
 										Email address
 									</div>
 									<div className="box-subtext">
-										team@cybersecurity-luxembourg.com
+										openxeco@nc3.lu
 									</div>
 								</div>
 							</div>
@@ -57,7 +70,7 @@ export default class PageContact extends React.Component {
 
 					<div className="col-md-6">
 						<a
-							href="https://cybersecurity.lu"
+							href="https://nc3.lu"
 							target="_blank"
 							rel="noreferrer">
 							<div className="box">
@@ -66,10 +79,10 @@ export default class PageContact extends React.Component {
 										<i className="far fa-paper-plane"/>
 									</div>
 									<div className="box-text">
-										CYBERLUX portal
+										NC3 portal
 									</div>
 									<div className="box-subtext">
-										https://cybersecurity.lu
+										https://nc3.lu
 									</div>
 								</div>
 							</div>
