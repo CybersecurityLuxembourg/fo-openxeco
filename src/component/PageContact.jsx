@@ -34,18 +34,22 @@ export default class PageContact extends React.Component {
 						<h1>Contact</h1>
 					</div>
 
-					<div className="col-md-4 offset-md-2 center">
+					<div className="col-md-12"/>
+
+					<div className="col-md-4 offset-md-1 center">
 						<img
 							src="/img/logo_nc3.jpg"
 						/>
 					</div>
 
-					<div className="col-md-4 center">
+					<div className="col-md-4 offset-md-2 center">
 						<div className="PageContact-spaced center">
 							<div>Luxembourg National Cybersecurity Competence Center (NC3)</div>
 							<div>122, Rue Adolphe Fischer, L-1521 Luxembourg</div>
 						</div>
 					</div>
+
+					<div className="col-md-12"/>
 
 					<div className="col-md-6">
 						<a
